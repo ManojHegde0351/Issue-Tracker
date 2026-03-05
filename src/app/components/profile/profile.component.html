@@ -1,0 +1,170 @@
+<div class="profile-wrapper">
+  <!-- Header Section -->
+  <div class="profile-header">
+    <h1 class="profile-title">User Profile</h1>
+    <p class="profile-subtitle">Manage your account settings and view your activity</p>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p class="loading-text">Loading profile...</p>
+  </div>
+
+  <!-- Profile Content -->
+  <div *ngIf="!isLoading" class="profile-content">
+    <!-- Profile Info Card -->
+    <div class="profile-info-card">
+      <div class="profile-avatar-section">
+        <div class="profile-avatar">
+          <span class="avatar-initial">{{ userProfile.avatar }}</span>
+        </div>
+        <div class="profile-main-info">
+          <h2 class="profile-name">{{ userProfile.fullName }}</h2>
+          <p class="profile-role">{{ userProfile.role }}</p>
+          <p class="profile-email">{{ userProfile.email }}</p>
+          <p class="profile-join-date">Member since {{ formatJoinDate() }}</p>
+        </div>
+      </div>
+
+      <!-- Statistics -->
+      <div class="profile-stats">
+        <div class="stat-item">
+          <span class="stat-number">{{ userProfile.stats.issuesCreated }}</span>
+          <span class="stat-label">Issues Created</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">{{ userProfile.stats.issuesResolved }}</span>
+          <span class="stat-label">Issues Resolved</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">{{ userProfile.stats.inProgress }}</span>
+          <span class="stat-label">In Progress</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Settings -->
+    <div class="profile-settings-card">
+      <div class="settings-header">
+        <h3 class="settings-title">Profile Settings</h3>
+        <button
+          class="btn-secondary edit-toggle-btn"
+          (click)="toggleEditMode()"
+          [disabled]="isLoading">
+          <span class="btn-icon">{{ isEditMode ? '❌' : '✏️' }}</span>
+          {{ isEditMode ? 'Cancel' : 'Edit Profile' }}
+        </button>
+      </div>
+
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="settings-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fullName" class="form-label">
+              <span class="label-icon">👤</span>
+              Full Name
+            </label>
+            <input
+              type="text"
+              id="fullName"
+              formControlName="fullName"
+              class="form-control"
+              [class.is-invalid]="profileForm.get('fullName')?.invalid && profileForm.get('fullName')?.touched"
+              [readonly]="!isEditMode"
+              placeholder="Enter your full name">
+            <div class="invalid-feedback"
+                 *ngIf="profileForm.get('fullName')?.invalid && profileForm.get('fullName')?.touched">
+              <div *ngIf="profileForm.get('fullName')?.errors?.['required']">Full name is required</div>
+              <div *ngIf="profileForm.get('fullName')?.errors?.['minlength']">Name must be at least 2 characters</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">
+              <span class="label-icon">📧</span>
+              Email Address
+            </label>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="form-control"
+              [class.is-invalid]="profileForm.get('email')?.invalid && profileForm.get('email')?.touched"
+              [readonly]="!isEditMode"
+              placeholder="Enter your email address">
+            <div class="invalid-feedback"
+                 *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+              <div *ngIf="profileForm.get('email')?.errors?.['required']">Email is required</div>
+              <div *ngIf="profileForm.get('email')?.errors?.['email']">Please enter a valid email</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="role" class="form-label">
+              <span class="label-icon">🏷️</span>
+              Role/Position
+            </label>
+            <input
+              type="text"
+              id="role"
+              formControlName="role"
+              class="form-control"
+              [class.is-invalid]="profileForm.get('role')?.invalid && profileForm.get('role')?.touched"
+              [readonly]="!isEditMode"
+              placeholder="Enter your role or position">
+            <div class="invalid-feedback"
+                 *ngIf="profileForm.get('role')?.invalid && profileForm.get('role')?.touched">
+              <div *ngIf="profileForm.get('role')?.errors?.['required']">Role is required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="bio" class="form-label">
+            <span class="label-icon">📝</span>
+            Bio
+          </label>
+          <textarea
+            id="bio"
+            formControlName="bio"
+            class="form-control"
+            [readonly]="!isEditMode"
+            placeholder="Tell us about yourself..."
+            rows="4"></textarea>
+        </div>
+
+        <div class="form-actions" *ngIf="isEditMode">
+          <button type="button" (click)="toggleEditMode()" class="btn-secondary">
+            <span class="btn-icon">❌</span>
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn-primary"
+            [disabled]="profileForm.invalid || isLoading">
+            <span class="btn-icon loading-spinner" *ngIf="isLoading">⏳</span>
+            <span class="btn-icon" *ngIf="!isLoading">💾</span>
+            {{ isLoading ? 'Saving...' : 'Save Changes' }}
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Account Actions -->
+    <div class="account-actions-card">
+      <h3 class="actions-title">Account Actions</h3>
+      <div class="actions-grid">
+        <button class="action-btn change-password-btn">
+          <span class="btn-icon">🔒</span>
+          Change Password
+        </button>
+        <button class="action-btn delete-account-btn">
+          <span class="btn-icon">⚠️</span>
+          Delete Account
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

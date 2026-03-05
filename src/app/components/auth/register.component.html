@@ -1,0 +1,117 @@
+<div class="auth-container">
+  <div class="auth-wrapper">
+    <div class="auth-header">
+      <button class="back-btn" (click)="goToLandingPage()" title="Back to Home">
+        <span>←</span>
+      </button>
+      <h1 class="auth-title">Create Account</h1>
+      <p class="auth-subtitle">Join Issue Tracker Pro and start managing your projects</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="auth-form">
+      <div class="form-group">
+        <label for="fullName">
+          Full Name
+        </label>
+        <input
+          type="text"
+          id="fullName"
+          formControlName="fullName"
+          placeholder="Enter your full name"
+          [class.error]="registerForm.get('fullName')?.invalid && registerForm.get('fullName')?.touched"
+        />
+        <div class="error-message" *ngIf="registerForm.get('fullName')?.invalid && registerForm.get('fullName')?.touched">
+          <span *ngIf="registerForm.get('fullName')?.errors?.['required']">Full name is required</span>
+          <span *ngIf="registerForm.get('fullName')?.errors?.['minlength']">Name must be at least 2 characters</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">
+          Email Address
+        </label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Enter your email address"
+          [class.error]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+        />
+        <div class="error-message" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+          <span *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</span>
+          <span *ngIf="registerForm.get('email')?.errors?.['email']">Please enter a valid email</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="role">
+          Role
+        </label>
+        <select
+          id="role"
+          formControlName="role"
+          [class.error]="registerForm.get('role')?.invalid && registerForm.get('role')?.touched"
+        >
+          <option value="user">Regular User</option>
+          <option value="admin">Administrator</option>
+          <option value="manager">Project Manager</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="password">
+          Password
+        </label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Create a strong password"
+          [class.error]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+        />
+        <div class="error-message" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+          <span *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</span>
+          <span *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">
+          Confirm Password
+        </label>
+        <input
+          type="password"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          placeholder="Confirm your password"
+          [class.error]="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
+        />
+        <div class="error-message" *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
+          <span *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Please confirm your password</span>
+          <span *ngIf="registerForm.get('confirmPassword')?.errors?.['passwordMismatch']">Passwords do not match</span>
+        </div>
+      </div>
+
+      <div class="success-message" *ngIf="successMessage">
+        <span>✅ {{ successMessage }}</span>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <button type="submit" class="btn-primary auth-btn" [disabled]="registerForm.invalid || isLoading">
+        <span class="btn-icon loading-spinner" *ngIf="isLoading">⏳</span>
+        {{ isLoading ? 'Creating Account...' : 'Create Account' }}
+      </button>
+
+      <div class="auth-divider">
+        <span>or</span>
+      </div>
+
+      <button type="button" class="btn-secondary auth-btn" (click)="goToLogin()">
+        Already have an account? Sign In
+      </button>
+    </form>
+  </div>
+</div>

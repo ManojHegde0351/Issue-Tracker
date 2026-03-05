@@ -1,0 +1,10 @@
+<button
+  class="theme-toggle-btn"
+  (click)="toggleTheme()"
+  [attr.aria-label]="'Switch to ' + (currentTheme === 'light' ? 'dark' : 'light') + ' theme'"
+  title="Toggle theme">
+  <span class="theme-icon" [class.dark]="currentTheme === 'dark'">
+    {{ currentTheme === 'light' ? '🌙' : '☀️' }}
+  </span>
+  <span class="theme-text">{{ currentTheme === 'light' ? 'Dark' : 'Light' }}</span>
+</button>

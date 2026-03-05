@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <title>Issue Tracker Pro</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="description" content="A professional issue tracking application">
+  <meta name="author" content="Issue Tracker Team">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-theme="light">
+  <!-- Beautiful Landing Page -->
+  <div id="landing-page" class="app-container">
+      <div class="nav-container">
+        <a class="nav-brand" href="#">ISSUE TRACKER</a>
+        <nav>
+          <ul class="nav-menu">
+            <li class="nav-item"><a class="nav-link active" href="#" data-page="home">Home</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-page="dashboard">
+                Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-page="issues">
+                Issues
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-page="create">
+                Create Issue
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-page="login">
+                Login
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-page="register">
+                Register
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main-content container">
+      <section class="welcome-section">
+        <h1 class="welcome-title">ISSUE TRACKER</h1>
+        <span class="app-tagline">Efficient, Team-Ready Issue Tracking</span>
+        <p class="welcome-subtitle">
+          A professional, robust platform for organizing and resolving issues fast.
+          Switch between dark and light modes for a comfortable workflow at any time.
+        </p>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <span class="feature-icon">🗂️</span>
+            <h3 class="feature-title">Organize Issues</h3>
+            <p class="feature-description">Quickly track, assign, and update issues in a collaborative workspace.</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🔄</span>
+            <h3 class="feature-title">Real-Time Sync</h3>
+            <p class="feature-description">See updates instantly across your team with live issue tracking.</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🌙</span>
+            <h3 class="feature-title">Dark Mode</h3>
+            <p class="feature-description">Reduce visual fatigue with a sleek, modern dark theme for long work sessions.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Issue List Section -->
+      <section class="issue-list-container" style="display: none;">
+        <h2>Open Issues</h2>
+        <ul class="issue-list">
+          <li class="issue-item">
+            <h3 class="issue-title">Sample Issue 1</h3>
+            <p class="issue-description">Description of sample issue 1 goes here.</p>
+            <span class="status-badge status-open">Open</span>
+          </li>
+          <li class="issue-item">
+            <h3 class="issue-title">Sample Issue 2</h3>
+            <p class="issue-description">Description of sample issue 2 goes here.</p>
+            <span class="status-badge status-in-progress">In Progress</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Issue Detail Section -->
+      <section class="issue-detail-container" style="display: none;">
+        <div class="issue-detail-wrapper">
+          <div class="issue-detail-header">
+            <h1 class="issue-detail-title">Issue Details</h1>
+            <p class="issue-detail-subtitle">View comprehensive information about the selected issue</p>
+          </div>
+          
+          <div class="issue-detail-card">
+            <div class="issue-header-info">
+              <div class="issue-title-section">
+                <h2 class="issue-main-title">Fix login authentication bug</h2>
+                <div class="issue-meta-badges">
+                  <span class="status-badge status-open">🔴 Open</span>
+                  <span class="priority-badge priority-high">⚡ High Priority</span>
+                  <span class="category-badge">🐛 Bug Report</span>
+                </div>
+              </div>
+              
+              <div class="issue-actions">
+                <button class="action-btn edit-btn">
+                  <span class="btn-icon">✏️</span>
+                  Edit
+                </button>
+                <button class="action-btn close-btn">
+                  <span class="btn-icon">✅</span>
+                  Close
+                </button>
+              </div>
+            </div>
+
+            <div class="issue-details-grid">
+              <div class="issue-info-section">
+                <h3 class="section-title">
+                  <span class="section-icon">📄</span>
+                  Description
+                </h3>
+                <div class="issue-description">
+                  <p>Users are unable to log in when their password contains special characters. The authentication system fails to properly encode special characters, causing login attempts to fail even with correct credentials.</p>
+                  
+                  <h4>Steps to Reproduce:</h4>
+                  <ol>
+                    <li>Create an account with a password containing special characters (@, #, $, etc.)</li>
+                    <li>Attempt to log in with the correct credentials</li>
+                    <li>Observe that login fails with "Invalid credentials" error</li>
+                  </ol>
+                  
+                  <h4>Expected Behavior:</h4>
+                  <p>Users should be able to log in successfully regardless of special characters in their password.</p>
+                </div>
+              </div>
+
+              <div class="issue-sidebar">
+                <div class="sidebar-section">
+                  <h4 class="sidebar-title">
+                    <span class="sidebar-icon">👤</span>
+                    Assignee
+                  </h4>
+                  <div class="assignee-info">
+                    <div class="assignee-avatar">JD</div>
+                    <span class="assignee-name">John Doe</span>
+                  </div>
+                </div>
+
+                <div class="sidebar-section">
+                  <h4 class="sidebar-title">
+                    <span class="sidebar-icon">📅</span>
+                    Timeline
+                  </h4>
+                  <div class="timeline-info">
+                    <p><strong>Created:</strong> 2 days ago</p>
+                    <p><strong>Updated:</strong> 1 hour ago</p>
+                    <p><strong>Due:</strong> Tomorrow</p>
+                  </div>
+                </div>
+
+                <div class="sidebar-section">
+                  <h4 class="sidebar-title">
+                    <span class="sidebar-icon">🏷️</span>
+                    Labels
+                  </h4>
+                  <div class="labels-container">
+                    <span class="label-tag">authentication</span>
+                    <span class="label-tag">security</span>
+                    <span class="label-tag">urgent</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="comments-section">
+              <h3 class="section-title">
+                <span class="section-icon">💬</span>
+                Comments & Activity
+              </h3>
+              <div class="comments-list">
+                <div class="comment-item">
+                  <div class="comment-avatar">JS</div>
+                  <div class="comment-content">
+                    <div class="comment-header">
+                      <span class="comment-author">Jane Smith</span>
+                      <span class="comment-time">2 hours ago</span>
+                    </div>
+                    <p class="comment-text">I've reproduced this issue. It seems to be related to URL encoding in the authentication middleware.</p>
+                  </div>
+                </div>
+                
+                <div class="comment-item">
+                  <div class="comment-avatar">BW</div>
+                  <div class="comment-content">
+                    <div class="comment-header">
+                      <span class="comment-author">Bob Wilson</span>
+                      <span class="comment-time">1 hour ago</span>
+                    </div>
+                    <p class="comment-text">Working on a fix. Should have a solution by end of day.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="add-comment">
+                <textarea placeholder="Add a comment..." rows="3"></textarea>
+                <button class="btn-primary comment-btn">
+                  <span class="btn-icon">💬</span>
+                  Add Comment
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Profile Section -->
+      <section class="profile-container" style="display: none;">
+        <div class="profile-header">
+          <div class="profile-avatar">
+            <span class="avatar-initial">JD</span>
+          </div>
+          <div class="profile-info">
+            <h2 class="profile-name">John Doe</h2>
+            <p class="profile-role">Senior Developer</p>
+            <p class="profile-email">john.doe@company.com</p>
+          </div>
+        </div>
+        
+        <div class="profile-stats">
+          <div class="stat-card">
+            <h3>12</h3>
+            <p>Issues Created</p>
+          </div>
+          <div class="stat-card">
+            <h3>8</h3>
+            <p>Issues Resolved</p>
+          </div>
+          <div class="stat-card">
+            <h3>4</h3>
+            <p>In Progress</p>
+          </div>
+        </div>
+
+        <div class="profile-form">
+          <h3>Profile Settings</h3>
+          <form class="settings-form">
+            <div class="form-group">
+              <label for="profile-name">Full Name</label>
+              <input type="text" id="profile-name" value="John Doe" />
+            </div>
+            <div class="form-group">
+              <label for="profile-email">Email</label>
+              <input type="email" id="profile-email" value="john.doe@company.com" />
+            </div>
+            <div class="form-group">
+              <label for="profile-role">Role</label>
+              <input type="text" id="profile-role" value="Senior Developer" />
+            </div>
+            <div class="form-group">
+              <label for="profile-bio">Bio</label>
+              <textarea id="profile-bio" rows="3" placeholder="Tell us about yourself..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary">Update Profile</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Create Issue Form Section -->
+      <section class="issue-form-container" style="display: none;">
+        <div class="create-issue-wrapper">
+          <div class="create-issue-header">
+            <h1 class="create-issue-title">Create New Issue</h1>
+            <p class="create-issue-subtitle">Report a bug, request a feature, or describe a task that needs attention</p>
+          </div>
+          
+          <div class="create-issue-form-box">
+            <form class="enhanced-issue-form">
+              <div class="form-row">
+                <div class="form-group full-width">
+                  <label for="issue-title">
+                    <span class="label-icon">📝</span>
+                    Issue Title
+                  </label>
+                  <input 
+                    type="text" 
+                    id="issue-title" 
+                    name="title" 
+                    placeholder="Enter a clear, descriptive title for your issue..."
+                    required 
+                  />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="issue-priority">
+                    <span class="label-icon">⚡</span>
+                    Priority Level
+                  </label>
+                  <select id="issue-priority" name="priority" required>
+                    <option value="">Select Priority</option>
+                    <option value="low">🟢 Low - Minor issue</option>
+                    <option value="medium">🟡 Medium - Standard issue</option>
+                    <option value="high">🔴 High - Critical issue</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="issue-category">
+                    <span class="label-icon">🏷️</span>
+                    Category
+                  </label>
+                  <select id="issue-category" name="category" required>
+                    <option value="">Select Category</option>
+                    <option value="bug">🐛 Bug Report</option>
+                    <option value="feature">✨ Feature Request</option>
+                    <option value="task">📋 Task</option>
+                    <option value="improvement">🔧 Improvement</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group full-width">
+                  <label for="issue-description">
+                    <span class="label-icon">📄</span>
+                    Detailed Description
+                  </label>
+                  <textarea 
+                    id="issue-description" 
+                    name="description" 
+                    rows="6"
+                    placeholder="Provide a detailed description of the issue. Include steps to reproduce, expected behavior, and any relevant context..."
+                    required
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="issue-assignee">
+                    <span class="label-icon">👤</span>
+                    Assign To
+                  </label>
+                  <select id="issue-assignee" name="assignee">
+                    <option value="">Unassigned</option>
+                    <option value="john.doe@company.com">John Doe</option>
+                    <option value="jane.smith@company.com">Jane Smith</option>
+                    <option value="bob.wilson@company.com">Bob Wilson</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="issue-due-date">
+                    <span class="label-icon">📅</span>
+                    Due Date
+                  </label>
+                  <input type="date" id="issue-due-date" name="dueDate" />
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="button" class="btn-secondary" data-page="home">
+                  <span class="btn-icon">❌</span>
+                  Cancel
+                </button>
+                <button type="submit" class="btn-primary">
+                  <span class="btn-icon">✅</span>
+                  Create Issue
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <section class="footer-section">
+            <h3>About</h3>
+            <p>A professional issue tracker to manage your team's bugs and enhancements with ease and style.</p>
+          </section>
+          <section class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="#" data-page="home">Home</a></li>
+              <li><a href="#" data-page="issues">Issues</a></li>
+              <li><a href="#" data-page="create">Create Issue</a></li>
+            </ul>
+          </section>
+        </div>
+        <div class="footer-bottom">
+          &copy; 2025 Issue Tracker Pro &mdash; Built with <span class="heart">♥</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Angular App Root (Hidden Initially) -->
+  <app-root style="display: none;">
+    <div class="initial-loading">
+      <div class="loading-spinner"></div>
+      <p>Loading Issue Tracker Pro...</p>
+    </div>
+  </app-root>
+
+  <!-- Navigation Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // Handle navigation clicks
+      document.addEventListener('click', function(e) {
+        if (e.target.closest('[data-page]')) {
+          e.preventDefault();
+          const page = e.target.closest('[data-page]').getAttribute('data-page');
+          
+          // Update active nav link
+          document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+          });
+          e.target.closest('.nav-link').classList.add('active');
+          
+          // Handle navigation
+          switch(page) {
+            case 'home':
+              showSection('welcome-section');
+              hideSection('issue-list-container');
+              hideSection('issue-detail-container');
+              hideSection('profile-container');
+              hideSection('issue-form-container');
+              break;
+            case 'dashboard':
+            case 'issues':
+            case 'create':
+              // Check if user is logged in
+              const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+              if (!isAuthenticated) {
+                showNotification('Please login to access this feature.', 'warning');
+                // Show welcome section
+                hideSection('issue-list-container');
+                hideSection('issue-detail-container');
+                hideSection('profile-container');
+                hideSection('issue-form-container');
+                hideSection('dashboard-container');
+                showSection('welcome-section');
+                return;
+              }
+              // If authenticated, redirect to Angular app
+              document.getElementById('landing-page').style.display = 'none';
+              document.querySelector('app-root').style.display = 'block';
+              window.history.pushState({}, '', '/' + page);
+              break;
+            case 'login':
+              // Hide landing page and show Angular login
+              document.getElementById('landing-page').style.display = 'none';
+              document.querySelector('app-root').style.display = 'block';
+              window.history.pushState({}, '', '/login');
+              break;
+            case 'register':
+              // Hide landing page and show Angular register
+              document.getElementById('landing-page').style.display = 'none';
+              document.querySelector('app-root').style.display = 'block';
+              window.history.pushState({}, '', '/register');
+              break;
+          }
+        }
+      });
+
+      function showSection(className) {
+        const section = document.querySelector(`.${className}`);
+        if (section) section.style.display = 'block';
+      }
+
+      function hideSection(className) {
+        const section = document.querySelector(`.${className}`);
+        if (section) section.style.display = 'none';
+      }
+
+
+      function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+          <div class="notification-content">
+            <span class="notification-icon">${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}</span>
+            <span class="notification-message">${message}</span>
+          </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          notification.remove();
+        }, 3000);
+      }
+
+      // Handle browser back/forward buttons
+      window.addEventListener('popstate', function(event) {
+        const path = window.location.pathname;
+        if (path === '/' || path === '') {
+          // Show landing page
+          document.getElementById('landing-page').style.display = 'block';
+          document.querySelector('app-root').style.display = 'none';
+        } else if (path === '/dashboard' || path.startsWith('/issues') || path === '/create' || path === '/login' || path === '/register') {
+          // Show Angular app
+          document.getElementById('landing-page').style.display = 'none';
+          document.querySelector('app-root').style.display = 'block';
+        }
+      });
+
+      // Set light theme by default
+      document.documentElement.setAttribute('data-theme', 'light');
+      document.body.setAttribute('data-theme', 'light');
+      
+      // Check initial URL and show appropriate view
+      const initialPath = window.location.pathname;
+      if (initialPath === '/dashboard' || initialPath.startsWith('/issues') || initialPath === '/create' || initialPath === '/login' || initialPath === '/register') {
+        document.getElementById('landing-page').style.display = 'none';
+        document.querySelector('app-root').style.display = 'block';
+      }
+    });
+  </script>
+
+  <style>
+    /* Initial loading styles for Angular */
+    .initial-loading {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #23283a 0%, #181e29 100%);
+      color: #38bdf8;
+      font-family: 'Inter', sans-serif;
+    }
+    .loading-spinner {
+      width: 3rem;
+      height: 3rem;
+      border: 4px solid rgba(56, 189, 248, 0.2);
+      border-top: 4px solid #38bdf8;
+      border-radius: 50%;
+      animation: spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.1); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+  </style>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<div class="app-container" [@routeAnimations]="prepareRoute(outlet)">
+  <header class="app-header">
+    <div class="nav-container">
+      <a class="nav-brand" (click)="goToLandingPage()">
+        ISSUE TRACKER
+      </a>
+      <nav>
+        <ul class="nav-menu">
+          <!-- Show only Login/Register when not authenticated -->
+          <ng-container *ngIf="!isAuthenticated">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/auth" routerLinkActive="active">
+                Login
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/auth" routerLinkActive="active">
+                Register
+              </a>
+            </li>
+          </ng-container>
+
+          <!-- Show full navigation when authenticated -->
+          <ng-container *ngIf="isAuthenticated">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+                Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/issues" routerLinkActive="active">
+                Issues
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/create" routerLinkActive="active">
+                Create Issue
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/profile" routerLinkActive="active">
+                Profile
+              </a>
+            </li>
+            <li class="nav-item theme-toggle-nav">
+              <app-theme-toggle></app-theme-toggle>
+            </li>
+            <li class="nav-item">
+              <button class="logout-btn" (click)="logout()" title="Logout">
+                Logout
+              </button>
+            </li>
+          </ng-container>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="page-transition-wrapper">
+        <router-outlet #outlet="outlet"></router-outlet>
+      </div>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <section class="footer-section">
+          <h3>About Issue Tracker Pro</h3>
+          <p>A professional, modern issue tracking system built with Angular and Flask. Manage your team's bugs, features, and tasks with style and efficiency.</p>
+          <div class="tech-stack">
+            <span class="tech-badge">Angular</span>
+            <span class="tech-badge">Flask</span>
+            <span class="tech-badge">TypeScript</span>
+            <span class="tech-badge">Python</span>
+          </div>
+        </section>
+
+        <section class="footer-section">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a (click)="goToLandingPage()">Home</a></li>
+            <li><a routerLink="/dashboard">Dashboard</a></li>
+            <li><a routerLink="/issues">All Issues</a></li>
+            <li><a routerLink="/create">Create New Issue</a></li>
+          </ul>
+        </section>
+
+        <section class="footer-section">
+          <h3>Features</h3>
+          <ul class="footer-links">
+            <li><a href="#" (click)="$event.preventDefault()">Real-time Updates</a></li>
+            <li><a href="#" (click)="$event.preventDefault()">Light Theme</a></li>
+            <li><a href="#" (click)="$event.preventDefault()">Responsive Design</a></li>
+            <li><a href="#" (click)="$event.preventDefault()">Advanced Search</a></li>
+          </ul>
+        </section>
+
+        <section class="footer-section">
+          <h3>Statistics</h3>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-number">{{ totalIssues }}</span>
+              <span class="stat-label">Total Issues</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">{{ openIssues }}</span>
+              <span class="stat-label">Open</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">{{ closedIssues }}</span>
+              <span class="stat-label">Closed</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Issue Tracker &mdash; Built with <span class="heart">♥</span> using Angular & Flask</p>
+        <p class="version">Version 1.0.0 | Last updated: {{ lastUpdated | date:'short' }}</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Action Button -->
+  <button class="fab" routerLink="/create" title="Create New Issue">
+    ➕
+  </button>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" [class.visible]="showScrollTop" (click)="scrollToTop()" title="Scroll to Top">
+    ↑
+  </button>
+
+  <!-- Global Loading Spinner -->
+  <div class="global-loading" *ngIf="isNavigating">
+    <div class="loading-overlay">
+      <div class="loading-spinner-large"></div>
+      <p class="loading-text">Loading...</p>
+    </div>
+  </div>
+</div>

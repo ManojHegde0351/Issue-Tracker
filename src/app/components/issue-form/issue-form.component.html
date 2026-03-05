@@ -1,0 +1,131 @@
+<div class="issue-form-wrapper">
+  <!-- Header Section -->
+  <div class="issue-form-header">
+    <h1 class="issue-form-title">{{isEditMode ? 'Edit Issue' : 'Create New Issue'}}</h1>
+    <p class="issue-form-subtitle">
+      {{isEditMode ? 'Update issue details and track changes' : 'Create a new issue to track and manage'}}
+    </p>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p class="loading-text">{{isEditMode ? 'Loading issue...' : 'Creating issue...'}}</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="!loading && error" class="error-container">
+    <div class="error-icon">⚠️</div>
+    <h3 class="error-title">Something went wrong</h3>
+    <p class="error-message">{{ error }}</p>
+    <button class="btn-primary retry-btn" (click)="onSubmit()">
+      Try Again
+    </button>
+  </div>
+
+  <!-- Form Content -->
+  <div *ngIf="!loading && !error" class="form-content">
+    <form [formGroup]="issueForm" (ngSubmit)="onSubmit()">
+      <!-- Title Field -->
+      <div class="form-group">
+        <label for="title" class="form-label">
+          <span class="label-icon">📝</span>
+          Issue Title *
+        </label>
+        <input
+          type="text"
+          id="title"
+          formControlName="title"
+          class="form-control"
+          [class.is-invalid]="issueForm.get('title')?.invalid && issueForm.get('title')?.touched"
+          placeholder="Enter a clear, descriptive title for the issue">
+        <div class="invalid-feedback"
+             *ngIf="issueForm.get('title')?.invalid && issueForm.get('title')?.touched">
+          <div *ngIf="issueForm.get('title')?.errors?.['required']">Title is required</div>
+          <div *ngIf="issueForm.get('title')?.errors?.['maxlength']">Title cannot exceed 200 characters</div>
+        </div>
+      </div>
+
+      <!-- Description Field -->
+      <div class="form-group">
+        <label for="description" class="form-label">
+          <span class="label-icon">📄</span>
+          Description
+        </label>
+        <textarea
+          id="description"
+          formControlName="description"
+          class="form-control"
+          placeholder="Provide detailed information about the issue, including steps to reproduce, expected behavior, and any relevant context"
+          rows="6"></textarea>
+      </div>
+
+      <!-- Two Column Layout for Form Fields -->
+      <div class="form-row">
+        <!-- Status Field -->
+        <div class="form-group">
+          <label for="status" class="form-label">
+            <span class="label-icon">🔄</span>
+            Status
+          </label>
+          <select id="status" formControlName="status" class="form-control">
+            <option *ngFor="let status of statusOptions" [value]="status">{{status}}</option>
+          </select>
+        </div>
+
+        <!-- Priority Field -->
+        <div class="form-group">
+          <label for="priority" class="form-label">
+            <span class="label-icon">⚡</span>
+            Priority
+          </label>
+          <select id="priority" formControlName="priority" class="form-control">
+            <option *ngFor="let priority of priorityOptions" [value]="priority">{{priority}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <!-- Category Field -->
+        <div class="form-group">
+          <label for="category" class="form-label">
+            <span class="label-icon">🏷️</span>
+            Category
+          </label>
+          <select id="category" formControlName="category" class="form-control">
+            <option *ngFor="let category of categoryOptions" [value]="category.value">{{category.label}}</option>
+          </select>
+        </div>
+
+        <!-- Assignee Field -->
+        <div class="form-group">
+          <label for="assignee" class="form-label">
+            <span class="label-icon">👤</span>
+            Assignee
+          </label>
+          <input
+            type="email"
+            id="assignee"
+            formControlName="assignee"
+            class="form-control"
+            placeholder="Enter assignee email address">
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="form-actions">
+        <button type="button" (click)="onCancel()" class="btn-secondary">
+          <span class="btn-icon">←</span>
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="btn-primary create-btn"
+          [disabled]="issueForm.invalid || loading">
+          <span class="btn-icon">{{isEditMode ? '✏️' : '➕'}}</span>
+          {{isEditMode ? 'Update Issue' : 'Create Issue'}}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

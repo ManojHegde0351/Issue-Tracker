@@ -1,0 +1,114 @@
+<div class="issue-list-wrapper">
+  <!-- Issue List Header -->
+  <div class="issue-list-header">
+    <h1 class="issue-list-title">Issues Dashboard</h1>
+    <p class="issue-list-subtitle">Manage and track all your team's issues in one place</p>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p class="loading-text">Loading issues...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="!loading && error" class="error-container">
+    <div class="error-icon">!</div>
+    <h3 class="error-title">Something went wrong</h3>
+    <p class="error-message">{{ error }}</p>
+    <button class="btn-primary retry-btn" (click)="loadIssues()">
+      Try Again
+    </button>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && !error && issues.length === 0" class="empty-container">
+    <div class="empty-icon">□</div>
+    <h3 class="empty-title">No Issues Found</h3>
+    <p class="empty-message">Get started by creating your first issue</p>
+    <button class="btn-primary" (click)="onCreateIssue()">
+      Create First Issue
+    </button>
+  </div>
+
+  <!-- Issues List -->
+  <div *ngIf="!loading && !error && issues.length > 0" class="issues-content">
+    <!-- Action Bar -->
+    <div class="action-bar">
+      <div class="issues-count">
+        <span class="count-number">{{ issues.length }}</span>
+        <span class="count-label">{{ issues.length === 1 ? 'Issue' : 'Issues' }}</span>
+      </div>
+      <div class="action-buttons">
+        <button class="btn-secondary filter-btn">
+          Filter
+        </button>
+        <button class="btn-primary" (click)="onCreateIssue()">
+          Create Issue
+        </button>
+      </div>
+    </div>
+
+    <!-- Issues Cards -->
+    <div class="issues-grid">
+      <div
+        *ngFor="let issue of issues"
+        class="issue-card"
+        (click)="onRowClick(issue)"
+      >
+        <div class="issue-card-header">
+          <h3 class="issue-card-title">{{ issue.title }}</h3>
+          <div class="issue-card-actions">
+            <button
+              class="action-btn edit-btn"
+              (click)="onEditIssue(issue, $event)"
+              title="Edit Issue"
+            >
+              <span class="btn-icon">✏️</span>
+            </button>
+          </div>
+        </div>
+
+        <p class="issue-card-description">{{ issue.description || 'No description provided' }}</p>
+
+        <div class="issue-card-meta">
+          <div class="issue-badges">
+            <span
+              class="status-badge"
+              [ngClass]="'status-' + (issue.status || 'open').toLowerCase().replace(' ', '-')"
+            >
+              {{ getStatusIcon(issue.status) }} {{ issue.status || 'Open' }}
+            </span>
+            <span
+              class="priority-badge"
+              [ngClass]="'priority-' + (issue.priority || 'medium').toLowerCase()"
+            >
+              {{ getPriorityIcon(issue.priority) }} {{ issue.priority || 'Medium' }}
+            </span>
+          </div>
+
+          <div class="issue-assignee" *ngIf="issue.assignee">
+            <div class="assignee-avatar">
+              {{ getInitials(issue.assignee) }}
+            </div>
+            <span class="assignee-name">{{ issue.assignee }}</span>
+          </div>
+          <div class="issue-assignee unassigned" *ngIf="!issue.assignee">
+            <div class="assignee-avatar unassigned-avatar">?</div>
+            <span class="assignee-name">Unassigned</span>
+          </div>
+        </div>
+
+        <div class="issue-card-footer">
+          <div class="issue-date">
+            <span class="date-icon">📅</span>
+            <span class="date-text">{{ formatDate(issue.createdAt) }}</span>
+          </div>
+          <div class="issue-id">
+            <span class="id-label">#{{ issue.id }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="issue-detail-container">
+  <div class="header">
+    <button (click)="onBack()" class="back-btn">← Back to Issues</button>
+    <h1>Issue Detail</h1>
+    <button *ngIf="issue" (click)="onEdit()" class="edit-btn">Edit Issue</button>
+  </div>
+  
+  <div *ngIf="loading" class="loading">Loading...</div>
+  <div *ngIf="error" class="error">{{error}}</div>
+  
+  <div *ngIf="issue && !loading" class="issue-content">
+    <div class="issue-summary">
+      <h2>{{issue.title}}</h2>
+      <div class="issue-meta">
+        <span class="status-badge status-{{issue.status.toLowerCase().replace(' ', '-')}}">{{issue.status}}</span>
+        <span class="priority-badge priority-{{issue.priority.toLowerCase()}}">{{issue.priority}}</span>
+        <span class="assignee">{{issue.assignee || 'Unassigned'}}</span>
+      </div>
+      <div class="timestamps">
+        <p><strong>Created:</strong> {{issue.createdAt | date:'full'}}</p>
+        <p><strong>Updated:</strong> {{issue.updatedAt | date:'full'}}</p>
+      </div>
+    </div>
+    
+    <div class="description-section">
+      <h3>Description</h3>
+      <p>{{issue.description || 'No description provided.'}}</p>
+    </div>
+    
+    <div class="json-section">
+      <h3>Raw JSON Data</h3>
+      <pre class="json-display">{{formatJson(issue)}}</pre>
+    </div>
+  </div>
+</div>

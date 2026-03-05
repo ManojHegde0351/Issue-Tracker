@@ -1,0 +1,40 @@
+/* Inherit all styles from login component */
+@import './login.component.css';
+
+/* Additional styles specific to register */
+.form-group select {
+  padding: var(--space-4);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-group select.error {
+  border-color: var(--error-500);
+}
+
+.success-message {
+  color: var(--success-500);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  padding: var(--space-3);
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+/* Wider wrapper for register form */
+.auth-wrapper {
+  max-width: 450px;
+}
